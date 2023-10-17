@@ -28,7 +28,7 @@ public class Sistema implements ISistema{
         try {
             this.database.save(edificio);
         } catch (PersistenceException ex){
-            throw new SistemaException("Error: ", ex);
+            throw new SistemaException("Error: " + ex.getMessage());
         }
 
         return edificio;

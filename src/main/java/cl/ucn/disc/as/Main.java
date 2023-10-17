@@ -1,7 +1,6 @@
 package cl.ucn.disc.as;
 
 import cl.ucn.disc.as.model.Edificio;
-import cl.ucn.disc.as.model.Persona;
 import cl.ucn.disc.as.services.ISistema;
 import cl.ucn.disc.as.services.Sistema;
 import io.ebean.DB;
@@ -18,8 +17,6 @@ public final class Main {
         Database db = DB.getDefault();
 
         ISistema sistema = new Sistema(db);
-
-        Persona persona = null;
 
         Edificio edificio = Edificio.builder()
                 .nombre("Y1")
