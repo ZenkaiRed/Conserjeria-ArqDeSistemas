@@ -4,32 +4,33 @@ import io.ebean.annotation.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.Instant;
+import java.util.List;
 
-/**
- * Clase Boleta
- */
-@ToString(callSuper = true)
+
 @AllArgsConstructor
 @Builder
 @Entity
 @Getter
-public class Boleta extends BaseModel{
+public class Contrato extends BaseModel {
 
-    @NotNull
-    private Integer monto;
 
     @NotNull
     private Instant fechaPago;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_departamento")
+    private Persona persona;
+
+    @NotNull
+    @ManyToOne
     private Departamento departamento;
 
+    @NotNull
+    @OneToMany(mappedBy = "contrato")
+    private List<Boleta> pagos;
 }

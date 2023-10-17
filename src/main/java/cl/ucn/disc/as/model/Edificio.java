@@ -1,9 +1,7 @@
 package cl.ucn.disc.as.model;
 
 import io.ebean.annotation.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -16,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 public class Edificio extends BaseModel{
 
     @NotNull

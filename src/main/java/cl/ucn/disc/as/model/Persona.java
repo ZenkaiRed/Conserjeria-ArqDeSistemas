@@ -7,9 +7,7 @@ package cl.ucn.disc.as.model;
 import cl.ucn.disc.as.model.exception.IllegalDomainException;
 import cl.ucn.disc.as.utils.ValidationUtils;
 import io.ebean.annotation.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 
@@ -22,6 +20,8 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 public class Persona extends BaseModel {
 
     /**
