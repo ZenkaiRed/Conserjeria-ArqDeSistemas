@@ -20,7 +20,7 @@ public class PersonaFinder extends Finder<Long, Persona> {
 
 
     /**
-     * The Constructor.
+     * Constructor.
      */
     public PersonaFinder() {
         super(Persona.class);
@@ -28,11 +28,10 @@ public class PersonaFinder extends Finder<Long, Persona> {
 
     /**
      * Find a Persona by rut.
-     *
      * @param rut to use.
      * @return the Persona.
      */
-    public Optional<Persona> byRut(@NotNull Integer rut) {
+    public Optional<Persona> byRut(@NotNull String rut) {
         return new QPersona().rut.eq(rut).findOneOrEmpty();
     }
 }
