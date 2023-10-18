@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
 
@@ -27,9 +26,7 @@ public class Boleta extends BaseModel{
     @NotNull
     private Instant fechaPago;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_departamento")
-    private Departamento departamento;
+    private Contrato contrato;
 
 }
