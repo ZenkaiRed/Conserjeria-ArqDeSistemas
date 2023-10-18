@@ -4,7 +4,7 @@
 
 package cl.ucn.disc.as.model;
 
-import cl.ucn.disc.as.model.exception.IllegalDomainException;
+import cl.ucn.disc.as.exceptions.IllegalDomainException;
 import cl.ucn.disc.as.utils.ValidationUtils;
 import io.ebean.annotation.NotNull;
 import lombok.*;

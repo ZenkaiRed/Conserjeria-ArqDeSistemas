@@ -1,4 +1,4 @@
-package cl.ucn.disc.as.model.exception;
+package cl.ucn.disc.as.exceptions;
 
 /**
  * @author Marcelo Céspedes Arqueros.

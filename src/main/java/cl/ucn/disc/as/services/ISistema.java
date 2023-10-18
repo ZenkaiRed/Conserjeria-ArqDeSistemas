@@ -1,9 +1,6 @@
 package cl.ucn.disc.as.services;
 
-import cl.ucn.disc.as.model.Contrato;
-import cl.ucn.disc.as.model.Departamento;
-import cl.ucn.disc.as.model.Edificio;
-import cl.ucn.disc.as.model.Persona;
+import cl.ucn.disc.as.model.*;
 
 import java.time.Instant;
 import java.util.List;
@@ -30,6 +27,6 @@ public interface ISistema {
 
     List<Persona> getPersonas();
 
-    List<Contrato> getPagos(String rut);
+    List<Boleta> getPagos(String rut);
 
 }
