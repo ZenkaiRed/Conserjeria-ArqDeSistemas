@@ -1,10 +1,7 @@
 package cl.ucn.disc.as;
 
-import cl.ucn.disc.as.model.Edificio;
-import cl.ucn.disc.as.services.ISistema;
-import cl.ucn.disc.as.services.Sistema;
-import io.ebean.DB;
-import io.ebean.Database;
+import cl.ucn.disc.as.ui.ApiRestServer;
+import cl.ucn.disc.as.ui.WebController;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -14,6 +11,11 @@ public final class Main {
 
         log.debug("Starting main...");
 
+        ApiRestServer.start(5000, new WebController());
+
+        log.debug("Done...");
+
+        /*
         Database db = DB.getDefault();
 
         ISistema sistema = new Sistema(db);
@@ -27,9 +29,11 @@ public final class Main {
 
         edificio = sistema.agregar(edificio);
 
-        log.debug("Edificio despues de la bd: {}", edificio);
+        log.debug("Edificio después de la bd: {}", edificio);
 
-        /*
+
+
+
         try {
             persona = Persona.builder()
                     .rut("20723668-3")
@@ -42,7 +46,7 @@ public final class Main {
         catch (Exception e){
             log.debug(e.getMessage());
         }
-        
+
 
         log.debug("La Persona antes de la db: ${}", persona);
 
