@@ -1,62 +1,34 @@
 package cl.ucn.disc.as;
 
+import cl.ucn.disc.as.grpc.PersonaGrpcService;
 import cl.ucn.disc.as.ui.ApiRestServer;
 import cl.ucn.disc.as.ui.WebController;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 
 @Slf4j
 public final class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException{
 
         log.debug("Starting main...");
 
         ApiRestServer.start(5000, new WebController());
 
-        log.debug("Done...");
+        log.debug("Done API Start.");
 
-        /*
-        Database db = DB.getDefault();
-
-        ISistema sistema = new Sistema(db);
-
-        Edificio edificio = Edificio.builder()
-                .nombre("Y1")
-                .direccion("Angamos #0610")
+        log.debug("Starting the gRPC server...");
+        Server server = ServerBuilder
+                .forPort(50123)
+                .addService(new PersonaGrpcService())
                 .build();
-
-        log.debug("Edificio antes de la bd: {}", edificio);
-
-        edificio = sistema.agregar(edificio);
-
-        log.debug("Edificio después de la bd: {}", edificio);
-
-
-
-
-        try {
-            persona = Persona.builder()
-                    .rut("20723668-3")
-                    .nombre("Marcelo")
-                    .apellidos("Cespedes Arqueros")
-                    .email("m.cespedes.arq@gmail.com")
-                    .telefono("+56977404965")
-                    .build();
-        }
-        catch (Exception e){
-            log.debug(e.getMessage());
-        }
-
-
-        log.debug("La Persona antes de la db: ${}", persona);
-
-        db.save(persona);
-
-        log.debug("La Persona desde la db: ${}", persona);
-
-        log.debug("Done. :)");
-        */
-
+        server.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
+        server.awaitTermination();
+        log.debug("Done.");
 
     }
 
