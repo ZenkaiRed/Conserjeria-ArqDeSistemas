@@ -27,7 +27,7 @@ services:
     image: marxx0103/conserjeria
     build: ./
     restart: always
-    container_name: "conserjeria"
+    container_name: "Conserjeria-MCA"
     tty: true
     depends_on:
       mariadb:
