@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    image: marxx0103/conserjeria
+    build: src
+    restart: always
+    container_name: "Conserjeria-MCA"
+    tty: true
+    environment:
+      DB_PLATFORM: sqlite
+      DB_URL: jdbc:sqlite:conserjeria.db
+    ports:
+      - "5000:5000"
+    networks:
+      - private
+networks:
+  private:
+    driver: bridge
