@@ -4,6 +4,7 @@ import cl.ucn.disc.as.model.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 public interface ISistema {
 
@@ -27,6 +28,10 @@ public interface ISistema {
 
     List<Persona> getPersonas();
 
+    Optional<Persona> getPersona(String rut);
+
     List<Boleta> getPagos(String rut);
+
+    public void populate();
 
 }

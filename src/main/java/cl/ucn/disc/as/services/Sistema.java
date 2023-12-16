@@ -1,15 +1,23 @@
 package cl.ucn.disc.as.services;
 
+import cl.ucn.disc.as.dao.PersonaFinder;
 import cl.ucn.disc.as.exceptions.SistemaException;
 import cl.ucn.disc.as.model.*;
+import cl.ucn.disc.as.utils.ValidationUtils;
+import com.github.javafaker.Faker;
+import com.github.javafaker.service.FakeValuesService;
+import com.github.javafaker.service.RandomService;
 import io.ebean.Database;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.PersistenceException;
 import java.time.Instant;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.Optional;
+@Slf4j
 @Builder
 public class Sistema implements ISistema{
 
@@ -155,6 +163,17 @@ public class Sistema implements ISistema{
     }
 
     @Override
+    public Optional<Persona> getPersona(String rut) {
+        try{
+            return new PersonaFinder().byRut(rut);
+        }
+        catch (PersistenceException ex){
+            log.error("Error", ex);
+            throw new SistemaException("Error al obtener persona");
+        }
+    }
+
+    @Override
     public List<Boleta> getPagos(String rut) {
         List<Boleta> listaBoletas;
 
@@ -166,6 +185,26 @@ public class Sistema implements ISistema{
         }
 
         return listaBoletas;
+    }
+
+    @Override
+    public void populate() {
+        Locale locale = new Locale("es-CL");
+        FakeValuesService fvs = new FakeValuesService(locale, new RandomService());
+        Faker faker = new Faker(locale);
+
+        for (int i = 0; i < 1000; i++) {
+            String rut = fvs.bothify("########");
+            String dv = ValidationUtils.dv(rut);
+            Persona persona = Persona.builder()
+                    .rut(rut + "-" + dv)
+                    .nombre(faker.name().firstName())
+                    .apellidos(faker.name().lastName())
+                    .email(faker.internet().emailAddress())
+                    .telefono(fvs.bothify("+569########"))
+                    .build();
+            this.agregar(persona);
+        }
     }
 
 
